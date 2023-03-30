@@ -13,8 +13,8 @@ const settings = {
 
 const options = (ssrc) => ({
   alpha: "discard",
-  codec: "vp09.00.10.08", //webm
-  // codec: "avc1.42002A", //H264
+  // codec: "vp09.00.10.08", //webm
+  codec: "avc1.42002A", //H264
   // codec: "vp09.00.10.08", //H264
   // avc: { format: "annexb" },
   // pt: 1,
