@@ -632,7 +632,6 @@ class pipeline {
         // var segmentDuration = 3; //in seconds
 
         // let id = 0;
-
         console.log("Inside Encode Video Stream");
 
         // // this.mp4Box = new MP4Box();
@@ -709,7 +708,7 @@ class pipeline {
 
             const uint8Array = new Uint8Array(chunk.byteLength);
             chunk.copyTo(uint8Array);
-            let buffer = uint8Array.buffer;
+            buffer = uint8Array.buffer;
             mp4boxfile.addSample(track, buffer, {
               duration: frameDuration,
             });
@@ -726,7 +725,7 @@ class pipeline {
               // mp4boxfile.onReady();
               // mp4boxfile.onSegment(count, null, buffer);
               self.postMessage({ data: buffer, type: "data" }, [buffer]);
-              buffer = null;
+              mp4boxfile.flush();
             }
 
             // videoChunks.push(chunk);
