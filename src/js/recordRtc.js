@@ -121,12 +121,7 @@ function captureVideo(videoInput) {
 
 function init() {
   const videoInput = document.getElementById("inputVideo");
-  // captureVideo(videoInput);
-  fetch("http://localhost:3000/files")
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    });
+  captureVideo(videoInput);
 }
 init();
 const startButton = document.getElementById("start");
@@ -139,4 +134,17 @@ const stopButton = document.getElementById("stop");
 stopButton.addEventListener("click", () => {
   console.log("Start recording..........");
   clearInterval(intt);
+});
+
+const showUploadedSegmentsData = document.getElementById(
+  "showUploadedSegmentsData"
+);
+showUploadedSegmentsData.addEventListener("click", () => {
+  fetch("http://localhost:3000/files")
+    .then((res) => res.json())
+    .then((data) => {
+      const ele = document.getElementById("data");
+      ele.innerHTML = JSON.stringify(data, null, 4);
+      console.log(data);
+    });
 });
