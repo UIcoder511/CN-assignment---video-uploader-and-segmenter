@@ -5,6 +5,7 @@ const router = express.Router();
 const util = require("util");
 const multer = require("multer");
 const cors = require("cors");
+const { addSegment, getData } = require("./utils");
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -40,11 +41,16 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
+app.get("/files", (req, res) => {
+  res.send(getData());
+});
+
 const upload = async (req, res) => {
   console.log("reqqq", req.body);
   try {
-    await uploadFileMiddleware(req, res);
-
+    const details = await uploadFileMiddleware(req, res);
+    console.log("reqqqqq", req.file, req.body.seqNo);
+    addSegment(req.file, req.body.seqNo);
     // if (req.file == undefined) {
     //   return res.status(400).send({ message: "Please upload a file!" });
     // }
@@ -61,7 +67,7 @@ const upload = async (req, res) => {
 };
 
 router.post("/upload", upload);
-//   router.get("/files", controller.getListFiles);
+
 //   router.get("/files/:name", controller.download);
 
 app.use(router);

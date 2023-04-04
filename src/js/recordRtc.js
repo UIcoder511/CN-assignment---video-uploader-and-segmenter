@@ -121,9 +121,14 @@ function captureVideo(videoInput) {
 
 function init() {
   const videoInput = document.getElementById("inputVideo");
-  captureVideo(videoInput);
+  // captureVideo(videoInput);
+  fetch("http://localhost:3000/files")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    });
 }
-
+init();
 const startButton = document.getElementById("start");
 startButton.addEventListener("click", () => {
   console.log("Start recording..........");
